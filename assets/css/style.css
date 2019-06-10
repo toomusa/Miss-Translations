@@ -1,4 +1,14 @@
 #heading {
+    font-family: 'Lobster', cursive;
+    text-align: center;
+    color: whitesmoke;
+    font-size: 50px;
+    background-color: rgba(104, 207, 255, 0.719);
+}
+
+#footing {
+    background-color: rgba(104, 207, 255, 0.719);
+    height: 70px;
     text-align: center;
 
 }
@@ -6,11 +16,12 @@
 #footing {
     font-size: 10px;
     text-align: center;
-
 }
 
 #main {
-
+width: 800px;
+height: 450px;
+background-color: rgba(104, 207, 255, 0.719);
 }
 
 #spacer {
