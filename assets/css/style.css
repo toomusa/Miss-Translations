@@ -19,11 +19,16 @@
 }
 
 #main {
-width: 800px;
+width: 900px;
 height: 450px;
 background-color: rgba(104, 207, 255, 0.719);
 }
 
 #spacer {
-    
+
+}
+.background{
+    border-image-repeat: stretch;
+    background-image: url("../images/waves.jpg");
+    background-size: 1600px 500px;
 }
