@@ -2,7 +2,7 @@
     font-family: 'Lobster', cursive;
     text-align: center;
     color: whitesmoke;
-    font-size: 50px;
+    font-size: 60px;
     background-color: rgba(104, 207, 255, 0.719);
 }
 
@@ -16,19 +16,17 @@
 #footing {
     font-size: 10px;
     text-align: center;
+    color: whitesmoke;
+
 }
 
 #main {
-width: 900px;
-height: 450px;
+width: 800px;
+height: 410px;
 background-color: rgba(104, 207, 255, 0.719);
 }
-
-#spacer {
-
-}
 .background{
-    border-image-repeat: stretch;
-    background-image: url("../images/waves.jpg");
-    background-size: 1600px 500px;
+    background-repeat: no-repeat;
+    background-image: url("../images/falling.gif");
+    background-size: 1600px 700px;
 }
