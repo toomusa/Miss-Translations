@@ -1,13 +1,13 @@
 #heading {
-    font-family: 'Lobster', cursive;
+    font-family: 'Monoton', cursive;
     text-align: center;
     color: whitesmoke;
     font-size: 60px;
-    background-color: rgba(104, 207, 255, 0.719);
+    background-color: rgba(0, 17, 255, 0.384);
 }
 
 #footing {
-    background-color: rgba(104, 207, 255, 0.719);
+    background-color: rgba(0, 17, 255, 0.384);
     height: 70px;
     text-align: center;
 
@@ -23,10 +23,16 @@
 #main {
 width: 800px;
 height: 410px;
-background-color: rgba(104, 207, 255, 0.719);
+color: whitesmoke;
+font-size: 20px;
+font-family: 'Quicksand', sans-serif;
+background-color: rgba(0, 17, 255, 0.384);
 }
 .background{
     background-repeat: no-repeat;
     background-image: url("../images/falling.gif");
     background-size: 1600px 700px;
+}
+.btn-primary{
+margin-left: 265px;
 }
