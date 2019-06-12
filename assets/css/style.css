@@ -56,4 +56,15 @@ margin-left: 265px;
     height: 230px;
     width: 330px;
     margin-left: 60px;
+    width: 800px;
+    height: 550px;
+    background-color: rgba(104, 207, 255, 0.719);
+}
+
+#spacer {
+    
+}
+
+.real-area {
+    text-align: center;
 }
