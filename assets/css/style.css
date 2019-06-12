@@ -19,11 +19,15 @@
 }
 
 #main {
-width: 800px;
-height: 450px;
-background-color: rgba(104, 207, 255, 0.719);
+    width: 800px;
+    height: 550px;
+    background-color: rgba(104, 207, 255, 0.719);
 }
 
 #spacer {
     
+}
+
+.real-area {
+    text-align: center;
 }

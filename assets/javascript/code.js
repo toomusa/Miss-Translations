@@ -1,19 +1,25 @@
 
-let word = "sprint";
+let word = "";
 let userObject = {};
 let renderedObject = {};
-var userArray = "";
+var userArray = [];
 var userInput = "";
-let newUserObject = {};
-let newUserArray = [];
 var sentence = "";
+let translation = "";
+let realTranslation = "";
+$("#real-output").hide();
+$("#real-translation").hide();
 
 const randomOf = (arr) => {
     chosenArr = Math.floor(Math.random() * arr.length);
     return chosenArr;
 }
 
-$(document).on("click", "#submit-request", function(){
+$(document).on("click", "#submit-request", function(event){
+    event.preventDefault();
+    $("#real-output").hide();
+    $("#real-output").empty();
+    $("#real-translation").hide()
     userInput = $("#user-input").val().trim();
     userArray = userInput.split(" ");
     $("#output").empty();
@@ -21,23 +27,34 @@ $(document).on("click", "#submit-request", function(){
     userObject = {};
     sentence = "";
     replaceWords();
-    console.log(userArray);
+    const reveal = () => {
+        $("#real-translation").show()
+        $("#real-output").show();
+    }
+    setTimeout(reveal, 3000);
+    console.log("User Object: " + userArray);
 })
 
-function toObject(userArray) {
+$(document).on("click", "#real-translation", function(event){
+    event.preventDefault();
+    realTranslate(userInput);
+    $("#real-output").show();
+    $("#real-output").html(realTranslation);
+});
+
+
+function makeObject(userArray) {
     for (let i = 0; i < userArray.length; ++i)
         userObject[i] = userArray[i];
     return userObject;
   }
 
 const replaceWords = async () => {
-    toObject(userArray);
+    makeObject(userArray);
     for (let key in userObject) {
         word = userObject[key];
-        // getWord(word);
         await getWordPromise(word);
     }
-    console.log("[getWord] ", renderedObject); 
     replacePhrase();
 }
 
@@ -72,7 +89,6 @@ const getWordPromise = (word) => {
 
                     }
                 }
-                console.log(renderedObject);
             }
             resolve()
         })
@@ -82,15 +98,13 @@ const getWordPromise = (word) => {
 const replacePhrase = () => {
     for (let k = 0; k < Object.values(userObject).length; k++) {
         if (renderedObject[userObject[k]]) {
-            console.log(Object.keys(userObject)[k])
             userObject[k] = renderedObject[userObject[k]];
-            console.log(userObject);
         }
     }
     for (let j in userObject) {
         sentence += userObject[j] + " ";
     }
-    console.log("replacePhrase", sentence)
+    console.log("Replaced Phrase: ", sentence)
     getTranslate(sentence);
 }
 
@@ -100,12 +114,23 @@ const getTranslate = (sentence) => {
         url: qURL,
         method: "POST",
     }).then(function(response){
-        console.log(response.data.translations[0].translatedText);
         let translation = response.data.translations[0].translatedText;
         $("#output").html(translation);
+        console.log("Translation: ", translation);
     })
 }
 
+const realTranslate = (userInput) => {
+    qURL = `https://translation.googleapis.com/language/translate/v2?target=es&q=${userInput}&key=AIzaSyClTfWgaANNnxJloF2kStJQwZorF8JhaG4`;
+    $.ajax ({
+        url: qURL,
+        method: "POST",
+    }).then(function(response){
+        let realTranslation = response.data.translations[0].translatedText;
+        $("#real-output").html(realTranslation);
+        console.log("Real Translation: ", realTranslation);
+    })
+}
 
 
 
