@@ -1,4 +1,32 @@
+const languages = {
+    af: "Afrikaans", sq: "Albanian", am: "Amharic", ar: "Arabic", hy: "Armenian", az: "Azerbaijani", eu: "Basque",
+    be: "Belarusian", bn: "Bengali", bs: "Bosnian", bg: "Bulgarian", ca: "Catalan", ceb: "Cebuano",
+    'zh-CN': "Chinese (Simplified)", 'zh-TW': "Chinese (Traditional)", co: "Corsican", hr: "Croatian", cs: "Czech",
+    da: "Danish", nl: "Dutch", en: "English", eo: "Esperanto", et: "Estonian", fi: "Finnish", fr: "French", 
+    fy: "Frisian", gl: "Galician", ka: "Georgian", de: "German", el: "Greek", gu: "Gujarati", 
+    ht: "Haitian Creole", ha: "Hausa", haw : "Hawaiian", he: "Hebrew", hi: "Hindi", hmn : "Hmong", 
+    hu: "Hungarian", is: "Icelandic", ig: "Igbo", id: "Indonesian", ga: "Irish", it: "Italian", ja: "Japanese", 
+    jw: "Javanese", kn: "Kannada", kk: "Kazakh", km: "Khmer", ko: "Korean", ku: "Kurdish", ky: "Kyrgyz", lo: "Lao", 
+    la: "Latin", lv: "Latvian", lt: "Lithuanian", lb: "Luxembourgish", mk: "Macedonian", mg: "Malagasy", ms: "Malay", 
+    ml: "Malayalam", mt: "Maltese", mi: "Maori", mr: "Marathi", mn: "Mongolian", my: "Myanmar (Burmese)", ne: "Nepali", 
+    no: "Norwegian", ny: "Nyanja (Chichewa)", ps: "Pashto", fa: "Persian", pl: "Polish", pt: "Portuguese (Portugal,  Brazil)", 
+    pa: "Punjabi", ro: "Romanian", ru: "Russian", sm: "Samoan", gd: "Scots Gaelic", sr: "Serbian", st: "Sesotho", sn: "Shona", 
+    sd: "Sindhi", si: "Sinhala (Sinhalese)", sk: "Slovak", sl: "Slovenian", so: "Somali", es: "Spanish", su: "Sundanese", 
+    sw: "Swahili", sv: "Swedish", tl: "Tagalog (Filipino)", tg: "Tajik", ta: "Tamil", te: "Telugu", th: "Thai", 
+    tr: "Turkish", uk: "Ukrainian", ur: "Urdu", uz: "Uzbek", vi: "Vietnamese", cy: "Welsh", xh: "Xhosa", 
+    yi: "Yiddish", yo: "Yoruba", zu: "Zulu", 
+}
 
+const langOption = () => {
+    for(let key in languages){
+        $lang = $('<option>').text(languages[key]).attr("id", key).addClass("lang-option");
+        $(".lang-select").append($lang);
+    }
+} 
+
+langOption();
+
+let lang = "en";
 let word = "";
 let userObject = {};
 let renderedObject = {};
@@ -15,7 +43,7 @@ const randomOf = (arr) => {
     return chosenArr;
 }
 
-$(document).on("click", "#submit-request", function(event){
+$(document).on("click", "#submit-request", function (event) {
     event.preventDefault();
     $("#real-output").hide();
     $("#real-output").empty();
@@ -33,9 +61,17 @@ $(document).on("click", "#submit-request", function(event){
     }
     setTimeout(reveal, 3000);
     console.log("User Object: " + userArray);
+    
 })
 
-$(document).on("click", "#real-translation", function(event){
+$(document).on("click", ".lang-select", function(event){
+    event.preventDefault();
+    lang = $(this).children(":selected").attr("id");
+    console.log(lang);
+
+})
+
+$(document).on("click", "#real-translation", function (event) {
     event.preventDefault();
     realTranslate(userInput);
     $("#real-output").show();
@@ -47,7 +83,7 @@ function makeObject(userArray) {
     for (let i = 0; i < userArray.length; ++i)
         userObject[i] = userArray[i];
     return userObject;
-  }
+}
 
 const replaceWords = async () => {
     makeObject(userArray);
@@ -59,19 +95,19 @@ const replaceWords = async () => {
 }
 
 const getWordPromise = (word) => {
-    return new Promise ((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         var queryURL = `https://wordsapiv1.p.mashape.com/words/${word}`
-        $.ajax ({
+        $.ajax({
             url: queryURL,
             method: "GET",
             headers: {
                 "X-Mashape-Key": "80c3fabd83mshc44d9723dc45a9ap1da501jsn8faca156e252"
             }
-        }).then(function(response){
+        }).then(function (response) {
             console.log(response);
             var anto = "";
             var partOfSpeech = "";
-            if (response.results){
+            if (response.results) {
                 for (let i = 0; i < response.results.length; i++) {
                     if (response.results[i].antonyms) {
                         anto = response.results[i].antonyms;
@@ -109,11 +145,11 @@ const replacePhrase = () => {
 }
 
 const getTranslate = (sentence) => {
-    qURL = `https://translation.googleapis.com/language/translate/v2?target=es&q=${sentence}&key=AIzaSyClTfWgaANNnxJloF2kStJQwZorF8JhaG4`;
-    $.ajax ({
+    qURL = `https://translation.googleapis.com/language/translate/v2?target=${lang}&q=${sentence}&key=AIzaSyClTfWgaANNnxJloF2kStJQwZorF8JhaG4`;
+    $.ajax({
         url: qURL,
         method: "POST",
-    }).then(function(response){
+    }).then(function (response) {
         let translation = response.data.translations[0].translatedText;
         $("#output").html(translation);
         console.log("Translation: ", translation);
@@ -121,11 +157,11 @@ const getTranslate = (sentence) => {
 }
 
 const realTranslate = (userInput) => {
-    qURL = `https://translation.googleapis.com/language/translate/v2?target=es&q=${userInput}&key=AIzaSyClTfWgaANNnxJloF2kStJQwZorF8JhaG4`;
-    $.ajax ({
+    qURL = `https://translation.googleapis.com/language/translate/v2?target=${lang}&q=${userInput}&key=AIzaSyClTfWgaANNnxJloF2kStJQwZorF8JhaG4`;
+    $.ajax({
         url: qURL,
         method: "POST",
-    }).then(function(response){
+    }).then(function (response) {
         let realTranslation = response.data.translations[0].translatedText;
         $("#real-output").html(realTranslation);
         console.log("Real Translation: ", realTranslation);
