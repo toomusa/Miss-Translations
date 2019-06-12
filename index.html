@@ -12,35 +12,32 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather&display=swap">
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Lobster|Satisfy|Shrikhand&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lovers+Quarrel&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Bungee+Inline|Cinzel+Decorative|Great+Vibes|Lobster|Monoton|Quicksand|Satisfy|Shrikhand&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
     integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
   <title>Miss Translator</title>
 </head>
 
-<body>
-
+<body class= "background">
   <div class="container">
     <!-- header row -->
     <div class="row">
       <div class="col-sm-12 col-xs-12 col-md-12" id="heading">
-        <h1 class="heading">Miss Translator!</h1>
+        <p class="heading">Miss Translator!</p>
       </div>
     </div>
 
-    <!-- left-side spacer -->
-    <div class="row">
-      <div class="col-sm-3 col-xs-1 col-md-4" id="spacer">
-        <h1>BOX1</h1>
-      </div>
-
-    <!-- main content area -->
+    <!-- Left main content area -->
       <div class="col-sm-6 col-xs-10 col-md-4" id="main">
         <form>
           <div class="form-group">
-            <label for="exampleFormControlTextarea1">What do you need translated?</label>
-            <textarea class="form-control" id="user-input" rows="3"></textarea>
+            <br>
+            <label for="exampleFormControlTextarea1"><h2>What do you need translated?</h2></label>
+            <textarea class="form-control" id="userInput" rows="3"></textarea>
+
           </div>
            
           <div class="row">
@@ -55,7 +52,6 @@
             
             <button type="button" class="btn btn-primary" id="submit-request">Submit</button>
           </div>
-          
           <div class="form-group">
             <label for="exampleFormControlTextarea1">Your translation!</label>
             <textarea class="form-control" id="output" rows="3"></textarea>
@@ -67,12 +63,22 @@
         </form>
       </div>
 
-    <!-- right-side spacer -->
-      <div class="col-sm-3 col-xs-1 col-md-4" id="spacer">
-        <h1>BOX3</h1>
+      <!-- middle space -->
+     <div class="row">
+      <div class="col-sm-1 col-xs-1 col-md-1" id="spacer">
       </div>
+
+    <!-- right-side spacer -->
+      <div class="col-sm-9 col-xs-1 col-md-9" id="rSpacer">
+          <div class="form-group">
+              <img class="photo" src="./assets/images/evil2.gif">
+              <label for="exampleFormControlTextarea1"><h2>Your translation!</h2></label>
+              <textarea class="form-control" id="output" rows="3"></textarea>
+            </div>
+          </div>
     </div>
   </div>
+  
 
     <div class="row mt-5">
       <div class="col-sm-12 col-xs-12 col-md-12" id="footing">
@@ -80,6 +86,7 @@
       </div>
     </div>
   </div>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script rel="javascript" src="./assets/javascript/code.js"></script>

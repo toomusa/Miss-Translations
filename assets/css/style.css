@@ -1,13 +1,14 @@
 #heading {
-    font-family: 'Lobster', cursive;
+    font-family: 'Lovers Quarrel', cursive;
     text-align: center;
     color: whitesmoke;
-    font-size: 50px;
-    background-color: rgba(104, 207, 255, 0.719);
+    font-size: 120px;
+    background-color: rgba(0, 17, 255, 0.384);
+    height: 150px;
 }
 
 #footing {
-    background-color: rgba(104, 207, 255, 0.719);
+    background-color: rgba(0, 17, 255, 0.384);
     height: 70px;
     text-align: center;
 
@@ -16,9 +17,45 @@
 #footing {
     font-size: 10px;
     text-align: center;
+    color: whitesmoke;
+
 }
 
 #main {
+width: 800px;
+height: 410px;
+color: whitesmoke;
+font-size: 20px;
+font-family: 'Quicksand', sans-serif;
+background-color: rgba(0, 17, 255, 0.384);
+float:left;
+margin-left: 100px;
+}
+.background{
+    background-image: cover;
+    background-image: url("../images/falling.gif");
+    background-size: 1600px 800px;
+}
+.btn-primary{
+margin-left: 265px;
+}
+.p{
+    margin-bottom: 0px;
+    margin-top:0px;
+}
+#rSpacer{
+    width: 1600px;
+    height: 410px;
+    color: whitesmoke;
+    font-size: 20px;
+    font-family: 'Quicksand', sans-serif;
+    background-color: rgba(0, 17, 255, 0.384);
+    float:right;
+}
+.photo{
+    height: 230px;
+    width: 330px;
+    margin-left: 60px;
     width: 800px;
     height: 550px;
     background-color: rgba(104, 207, 255, 0.719);
