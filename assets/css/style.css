@@ -32,7 +32,7 @@ float:left;
 margin-left: 100px;
 }
 .background{
-    background-repeat: no-repeat;
+    background-image: cover;
     background-image: url("../images/falling.gif");
     background-size: 1600px 800px;
 }
