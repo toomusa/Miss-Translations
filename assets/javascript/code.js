@@ -2,9 +2,14 @@
 let word = "sprint";
 // let userArray = [];
 let userObject = {};
-// var userInput = $("#user-input").val().trim();
-var anto = false;
-var partOfSpeech = "";
+let renderedObject = {};
+var userArray = "";
+var userInput = "";
+// var anto = "";
+// var partOfSpeech = "";
+let newUserObject = {};
+let newUserArray = [];
+var sentence = "";
 
 const randomOf = (arr) => {
     chosenArr = Math.floor(Math.random() * arr.length);
@@ -12,80 +17,165 @@ const randomOf = (arr) => {
 }
 
 
+$(document).on("click", "#submit-request", function(){
+    userInput = $("#user-input").val().trim();
+    userArray = userInput.split(" ");
+    $("#output").empty();
+    renderedObject = {};
+    userObject = {};
+    sentence = "";
+    replaceWords();
+})
+
 // take in user input and turn it into array
 
-userInput = "I ate an apple";
+// userInput = "I ate an apple";
 
-var userArray = userInput.split(" ");
 
-userArray = ["I", "ate", "an", "apple"];
+// userArray = ["I", "ate", "an", "apple"];
 
 console.log(userArray);
 
 // take in user input array and turn it into an object
 
 function toObject(userArray) {
-    for (var i = 0; i < userArray.length; ++i)
+    for (let i = 0; i < userArray.length; ++i)
         userObject[i] = userArray[i];
     return userObject;
   }
 
 
-const replaceWords = () => {
-    debugger;
-    toObject(userArray); 
+const replaceWords = async () => {
+    toObject(userArray);
     for (let key in userObject) {
-        word = valueOf(userObject.key);
-        console.log(key);
-        // console.log(userObject.key);
-
-        // console.log(word);
-        getWord(word);
-        if (partOfSpeech === "noun") {
-            valueOf(key) = anto;
-        }
-        if (partOfSpeech === "verb") {
-            valueOf(key) = anto;
-        }
+        word = userObject[key];
+        // getWord(word);
+        await getWordPromise(word);
     }
-    newUserInput = JSON.stringify(userObject);
-    getTranslate(newUserInput);
+    console.log("[getWord] ", renderedObject); 
+    replacePhrase();
 }
 
-const getWord = () => {
-    var queryURL = `https://wordsapiv1.p.mashape.com/words/${word}`
-    $.ajax ({
-        url: queryURL,
-        method: "GET",
-        headers: {
-            "X-Mashape-Key": "80c3fabd83mshc44d9723dc45a9ap1da501jsn8faca156e252"
-        }
-    }).then(function(response){
-        console.log(response);
-        if (response.results){
-            partOfSpeech = response.results[0].partOfSpeech;
-            for (let i = 0; i < response.results.length; i++) {
-                if (response.results[i].antonyms) {
-                    anto = response.results[i].antonyms;
-                    break;
-                } else {
-                    anto = response.results[i].synonyms[i];
-                    break;
-                }
+// const speechPart = () => {
+//     for (let key in userObject) {
+//         if (partOfSpeech === "noun") {
+//             userObject[key] = anto;
+//         }
+//         if (partOfSpeech === "verb") {
+//             userObject[key] = anto;
+//         }
+//     }
+// }
+
+const getWordPromise = (word) => {
+    return new Promise ((resolve, reject) => {
+        var queryURL = `https://wordsapiv1.p.mashape.com/words/${word}`
+        $.ajax ({
+            url: queryURL,
+            method: "GET",
+            headers: {
+                "X-Mashape-Key": "80c3fabd83mshc44d9723dc45a9ap1da501jsn8faca156e252"
             }
-        }
-        console.log(anto);
-        console.log(partOfSpeech);
+        }).then(function(response){
+            console.log(response);
+            var anto = "";
+            var partOfSpeech = "";
+            if (response.results){
+                for (let i = 0; i < response.results.length; i++) {
+                    if (response.results[i].antonyms) {
+                        anto = response.results[i].antonyms;
+                        partOfSpeech = response.results[i].partOfSpeech;
+                        if (partOfSpeech === "noun" || partOfSpeech === "verb") {
+                            renderedObject[word] = anto;
+                        }
+                    } else if (response.results[i].synonyms) {
+                        anto = response.results[i].synonyms[i];
+                        partOfSpeech = response.results[i].partOfSpeech;
+                        if (partOfSpeech === "noun" || partOfSpeech === "verb") {
+                            renderedObject[word] = anto;
+                        }
+                    } else {
+
+                    }
+                }
+                console.log(renderedObject);
+                // replacePhrase();
+            }
+            resolve()
+        })
     })
 }
 
-const getTranslate = () => {
-    qURL = `https://translation.googleapis.com/language/translate/v2?target=es&q=${newUserInput}&key=AIzaSyClTfWgaANNnxJloF2kStJQwZorF8JhaG4`;
+
+// const getWord = (word) => {
+//     var queryURL = `https://wordsapiv1.p.mashape.com/words/${word}`
+//     $.ajax ({
+//         url: queryURL,
+//         method: "GET",
+//         headers: {
+//             "X-Mashape-Key": "80c3fabd83mshc44d9723dc45a9ap1da501jsn8faca156e252"
+//         }
+//     }).then(function(response){
+//         console.log(response);
+//         var anto = "";
+//         var partOfSpeech = "";
+//         if (response.results){
+//             for (let i = 0; i < response.results.length; i++) {
+//                 if (response.results[i].antonyms) {
+//                     anto = response.results[i].antonyms.trim();
+//                     partOfSpeech = response.results[i].partOfSpeech.trim();
+//                     if (partOfSpeech === "noun" || partOfSpeech === "verb") {
+//                         renderedObject[word] = anto;
+//                     }
+//                 } else if (response.results[i].synonyms) {
+//                     anto = response.results[i].synonyms[i].trim();
+//                     partOfSpeech = response.results[i].partOfSpeech.trim();
+//                     if (partOfSpeech === "noun" || partOfSpeech === "verb") {
+//                         renderedObject[word] = anto;
+//                     }
+//                 } else {
+//                 }
+//             }
+//             console.log(renderedObject);
+//             // replacePhrase();
+//         }
+//         console.log("antonym: " + anto);
+//         console.log("part of speech: " + partOfSpeech);
+//     })
+// }
+
+/*
+renderedObject
+{an: "associate in nursing", apple: "malus pumila", I: "one"}
+userObject
+{0: "I", 1: "ate", 2: "an", 3: "apple"}
+*/
+const replacePhrase = () => {
+    for (let k = 0; k < Object.values(userObject).length; k++) {
+        if (renderedObject[userObject[k]]) {
+            console.log(Object.keys(userObject)[k])
+            userObject[k] = renderedObject[userObject[k]];
+            console.log(userObject);
+        }
+    }
+    for (let j in userObject) {
+        sentence += userObject[j] + " ";
+    }
+    console.log("replacePhrase", sentence)
+    getTranslate(sentence);
+}
+// newUserInput = newUserArray.toString();
+// getTranslate(newUserInput);
+
+const getTranslate = (sentence) => {
+    qURL = `https://translation.googleapis.com/language/translate/v2?target=es&q=${sentence}&key=AIzaSyClTfWgaANNnxJloF2kStJQwZorF8JhaG4`;
     $.ajax ({
         url: qURL,
         method: "POST",
     }).then(function(response){
         console.log(response.data.translations[0].translatedText);
+        let translation = response.data.translations[0].translatedText;
+        $("#output").html(translation);
     })
 }
 
