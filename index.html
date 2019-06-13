@@ -44,7 +44,13 @@
         <form>
           <div class="form-group" id="form-input">
             <label for="exampleFormControlTextarea1">What do you need translated?</label>
-            <textarea class="form-control" id="user-input" rows="2"></textarea>
+            <textarea class="form-control" id="user-input" placeholder="Type here or use the voice recognition button." rows="3"></textarea>
+            <!--Buttons & icons to start comands voice-->
+            <br> 
+            <p class="icon"><i class="fas fa-microphone-alt" id="microphone-icon" ></i></p>
+            <button type="button" class="btn btn-primary" id="start-recording">Start Recording</button>
+            <button type="button" class="btn btn-primary" id="pause-recording">Stop Recording </i></button>
+            <button type="button" class="btn btn-primary" id="delete-content">Reset</button>
           </div>
           <div>
             <select data-placeholder="Choose a Language" class="lang-select">
@@ -54,7 +60,7 @@
           </div>
           <div>  
             <button type="button" class="btn btn-primary" id="submit-request">Submit</button>
-          </div>
+            </div>
           <div class="form-group" id="form-output">
             <label for="exampleFormControlTextarea1">Your translation!</label>
             <textarea class="form-control" id="output" rows="2"></textarea>
@@ -86,8 +92,9 @@
     <!-- extra style elements -->
       <!-- <div class="col-sm-9 col-xs-1 col-md-9" id="rSpacer">
               <img class="photo" src="./assets/images/evil2.gif"> -->
-
+         
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script rel="javascript" src="./assets/javascript/code.js"></script>
+    <script rel="javascript" src="./assets/javascript/voicecode.js"></script>
 </body>
 </html>
