@@ -1,40 +1,44 @@
 #heading {
-    font-family: 'Lovers Quarrel', cursive;
+    font-family: 'Great Vibes', cursive;
     color: whitesmoke;
     text-align: center;
-    background-color: rgba(0, 17, 255, 0.384);
+    background-color: rgba(0, 0, 0, 0.479);
+    box-shadow: 0 0 8px 3px whitesmoke;
+    border-radius: 15px;
 }
 
 #footing {
-    background-color: rgba(0, 17, 255, 0.384);
+    background-color: rgba(0, 0, 0, 0.479);
     text-align: center;
     color: whitesmoke;
+    box-shadow: 0 0 8px 3px whitesmoke;
+    border-radius: 15px;
 }
 
 #main {
     font-family: 'Quicksand', sans-serif;
     font-size: 20px;
+    margin-top:10px;
+    margin-bottom: 10px;
     text-align: center;
     color: whitesmoke; 
-    background-color: rgba(0, 17, 255, 0.384);
-    min-height: 550px;
+    background-color: rgba(0, 0, 0, 0.479);
+    min-height: 500px;
+    box-shadow: 0 0 8px 3px whitesmoke;
+    border-radius: 15px;
 }
 
-/* .background {
+.background {
     background-image: cover;
-    background-image: url("../images/falling.gif");
+    height: 700px;
+    background-image: url("../images/city.jpeg");
     background-size: 1600px 800px;
-} */
+}
 
-/* .photo {
-    height: 230px;
-    width: 330px;
-    margin-left: 60px;
-    background-color: rgba(104, 207, 255, 0.719);
-}  */
-
-#spacer {
-    
+#head {
+    margin: 0 auto;
+    font-size: 90px;
+    vertical-align: middle;
 }
 
 
@@ -61,6 +65,4 @@
     text-align: center;
     display: none;
  }
- 
 
- 
