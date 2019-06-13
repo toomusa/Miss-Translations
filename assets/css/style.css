@@ -1,7 +1,6 @@
 #heading {
     font-family: 'Great Vibes', cursive;
     color: whitesmoke;
-    font-size:60px;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.479);
     box-shadow: 0 0 8px 3px whitesmoke;
@@ -35,6 +34,8 @@
     background-image: url("../images/city.jpeg");
     background-size: 1600px 800px;
 }
-.btn{
-    margin-left: 220px;
+#head {
+    margin: 0 auto;
+    font-size: 90px;
+    vertical-align: middle;
 }
