@@ -82,7 +82,7 @@ $(document).on("click", "#real-translation", function (event) {
 function makeObject(userArray) {
     for (let i = 0; i < userArray.length; ++i)
         userObject[i] = userArray[i];
-    return userObject;
+    return userObject;  
 }
 
 const replaceWords = async () => {
@@ -90,44 +90,61 @@ const replaceWords = async () => {
     for (let key in userObject) {
         word = userObject[key];
         await getWordPromise(word);
+        console.log("after getwordpromise")
     }
+    console.log("replace Phrase")
     replacePhrase();
 }
 
 const getWordPromise = (word) => {
+    console.log(word)
     return new Promise((resolve, reject) => {
-        var queryURL = `https://wordsapiv1.p.mashape.com/words/${word}`
-        $.ajax({
-            url: queryURL,
-            method: "GET",
-            headers: {
-                "X-Mashape-Key": "80c3fabd83mshc44d9723dc45a9ap1da501jsn8faca156e252"
-            }
-        }).then(function (response) {
-            console.log(response);
-            var anto = "";
-            var partOfSpeech = "";
-            if (response.results) {
-                for (let i = 0; i < response.results.length; i++) {
-                    if (response.results[i].antonyms) {
-                        anto = response.results[i].antonyms;
-                        partOfSpeech = response.results[i].partOfSpeech;
-                        if (partOfSpeech === "noun" || partOfSpeech === "verb") {
-                            renderedObject[word] = anto;
-                        }
-                    } else if (response.results[i].synonyms) {
-                        anto = response.results[i].synonyms[i];
-                        partOfSpeech = response.results[i].partOfSpeech;
-                        if (partOfSpeech === "noun" || partOfSpeech === "verb") {
-                            renderedObject[word] = anto;
-                        }
-                    } else {
-
-                    }
+        if (word.length <= 2) {
+            return resolve();
+        } else {
+            var queryURL = `https://wordsapiv1.p.mashape.com/words/${word}`
+            $.ajax({
+                url: queryURL,
+                method: "GET",
+                headers: {
+                    "X-Mashape-Key": "80c3fabd83mshc44d9723dc45a9ap1da501jsn8faca156e252"
                 }
-            }
-            resolve()
-        })
+            }).then(function (response) {
+                console.log("[getWordPromise]", response);
+                var anto = "";
+                var partOfSpeech = "";
+                if (response.results) {
+                    let isfound = false
+                    for (let i = 0; i < response.results.length; i++) {
+                        console.log(response.results[i].antonyms)
+                        if (response.results[i].antonyms) {
+                            anto = response.results[i].antonyms;
+                            partOfSpeech = response.results[i].partOfSpeech;
+                            if (partOfSpeech === "noun" || partOfSpeech === "verb" || partOfSpeech === "adjective") {
+                                renderedObject[word] = anto;    
+                            }
+                            isfound = true
+                            break;
+                        } else {
+
+                        }
+                    }
+                    if (!isfound) {
+                        for (let i = 0; i < response.results.length; i++) {
+                            if (response.results[i].synonyms && isfound === false) {
+                                anto = response.results[i].synonyms[i];
+                                partOfSpeech = response.results[i].partOfSpeech;
+                                if (partOfSpeech === "noun" || partOfSpeech === "verb" || partOfSpeech === "adjective") {
+                                    renderedObject[word] = anto;
+                                }
+                            } else { }
+                        }
+                    }
+
+                }
+                resolve()
+            })
+        }
     })
 }
 
@@ -168,6 +185,12 @@ const realTranslate = (userInput) => {
     })
 }
 
+
+// input validation
+
+// if language isn't selected, show modal
+
+// add firebase persistence 
 
 
 
