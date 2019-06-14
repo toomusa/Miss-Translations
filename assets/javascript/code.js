@@ -42,14 +42,24 @@ const randomOf = (arr) => {
     chosenArr = Math.floor(Math.random() * arr.length);
     return chosenArr;
 }
+  
+// function checkRegex(){
+//     let input = $('#inputArea').val()
+//     let check = /[ˆ(\d|+|\-)]/
+//     if(check.test(input) === true) {
+//         alert("try again");
+//         return;
+//     }
+// }
 
 $(document).on("click", "#submit-request", function (event) {
     event.preventDefault();
-    $("#real-output").hide();
-    $("#real-output").empty();
-    $("#real-translation").hide()
     userInput = $("#user-input").val().trim();
     userArray = userInput.split(" ");
+    // checkRegex();
+    $("#real-output").hide();
+    $("#real-output").empty();
+    $("#real-translation").hide()    
     $("#output").empty();
     renderedObject = {};
     userObject = {};
