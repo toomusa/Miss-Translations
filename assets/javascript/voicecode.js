@@ -48,9 +48,9 @@ $('#start-recording').on('click', function (e) {
     }
     recognition.start();
     // recording icon
-    // $("#microphone-icon").addClass("active-mic");
+    $("#microphone-icon").addClass("active-mic");
 
-    $("#microphone-icon").show();
+    // $("#microphone-icon").show();
     
   
     
@@ -60,8 +60,8 @@ $('#start-recording').on('click', function (e) {
 $('#pause-recording').on('click', function (e) {
     recognition.stop();
     // pause icon
-    // $("#microphone-icon").removeClass("active-mic");
-    $("#microphone-icon").hide();
+    $("#microphone-icon").removeClass("active-mic");
+    // $("#microphone-icon").hide();
    
 });
 
